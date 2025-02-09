@@ -26,7 +26,7 @@
         </div>
         <div class="mt-6">
          <h2 class="text-xl font-medium xl:text-2xl">
-          <a class="inline-block text-dark transition hover:text-primary dark:text-light/70 dark:hover:text-primary" href="article.html">
+          <a class="inline-block text-dark transition hover:text-primary dark:text-light/70 dark:hover:text-primary" href="{% url 'blog_detail' id=blog.id %}">
               {{ blog.title}}
           </a>
          </h2>

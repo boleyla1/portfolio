@@ -11,8 +11,7 @@ def blog_list(request):
 
 def blog_detail(request, id):
     blog = get_object_or_404(Blog, id=id)
-    post = get_object_or_404(blog, id=id)
-    post.views += 1
-    post.save()
+    blog.views += 1
+    blog.save()
     blog.created_at_shamsi = jdatetime.datetime.fromgregorian(datetime=blog.created_at).strftime('%Y/%m/%d %H:%M')
-    return render(request, 'weblog/blog_details.html', {'blog': blog , 'post': post})
+    return render(request, 'weblog/blog_details.html', {'blog': blog})
