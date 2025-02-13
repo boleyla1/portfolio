@@ -5,8 +5,11 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=1" name="viewport"/>
   <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <meta name="description" content="مهرشاد بلیلا - سایت  مهرشاد بلیلا برنامه نویس پایتون و توسعه دهتده وب و هوش مصنوعی ، طراحی مدرن و حرفه‌ای برای نمایش کارهای شما.">
+  <meta name="keywords" content="مهرشاد یلیلا, mehrshad boleyla, هوش مصنوعی , طراحی وب, ربات تلگرام">
+
   <title>
-   بنتوفولیو - قالب پورتفولیو شخصی با تیلویند
+   مهرشاد بلیلا - توسعه دهنده وب و هوش مصنوعی
   </title>
   <link href="{% static '' %}" rel="icon" type="image/svg+xml"/>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -107,9 +110,11 @@
         </a>
        </li>
       </ul>
+         <a href="{% url 'send_code' %}">
              <button id="authButton" class="bg-primary text-white px-4 py-2 rounded-lg">
         ثبت نام / ورود
       </button>
+             </a>
       <div class="hidden items-center gap-4 lg:flex">
        <div class="">
         <button class="hs-dark-mode group flex h-10 w-10 items-center justify-center rounded-lg text-center font-medium text-dark transition hover:bg-light hs-dark-mode-active:hidden dark:text-gray-400 dark:hover:text-gray-500" data-hs-theme-click-value="dark" type="button">
@@ -301,6 +306,8 @@
     </div>
    </div>
     <!-- Main content -->
+
+
     <main class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-6">
       <div class="rounded-2xl bg-white p-6 shadow dark:bg-black dark:shadow-dark " style=" height: 564px;">
      <div class="aspect-6/4 overflow-hidden rounded-lg bg-light pt-4 text-center dark:bg-dark-2">
@@ -374,41 +381,31 @@
       </div>
      </div>
     </div>
-  
+            {% block rigester %}{% endblock %}
+    {% block verify %}
+    	
+    {% endblock %}
+    {% block name %}
+  {% endblock %}
       {% block content %}{% endblock %}
+
     </main>
 
     <!-- Footer -->
     <footer class="text-center">
       <p class="text-sm dark:text-light/70">
-        @ بنتوفولیو ۱۴۰۳، طراحی توسط
-        <a class="inline-block border-b border-b-transparent text-primary transition hover:border-b-primary hover:text-blue-600" href="https://eltheme.ir" target="_blank">
-          ال تم
+        @  ۱۴۰۳، طراحی توسط
+        <a class="inline-block border-b border-b-transparent text-primary transition hover:border-b-primary hover:text-blue-600" href="https://instagram.com/mehrshad.boleyla" target="_blank">
+          مهرشاد یلیلا
         </a>
       </p>
     </footer>
   
   
-{#  مودال ریجستر#}
-<div id="authModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-  <div class="bg-white p-6 rounded-lg w-full max-w-md relative">
-    <button id="closeAuthModal" class="close-button bg-red-500 text-white px-2 py-1 rounded">X</button>
-    <h2 id="numertext" class="text-xl font-semibold">شماره تلفن خود را وارد کنید</h2>
-    <input id="phoneInput" type="text" class="mt-4 p-2 border rounded w-full" placeholder="شماره تلفن">
-    <button id="sendCodeButton" class="bg-primary text-white px-4 py-2 rounded-lg mt-4">ارسال کد</button>
-  </div>
-</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<div id="codeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-  <div class="bg-white p-6 rounded-lg w-full max-w-md relative">
-    <button id="closeCodeModal" class="close-button bg-red-500 text-white px-2 py-1 rounded">X</button>
-    <h2 class="text-xl font-semibold">کد ۵ رقمی را وارد کنید</h2>
-    <input id="codeInput" type="text" class="mt-4 p-2 border rounded w-full" placeholder="کد ۵ رقمی">
-    <button class="bg-primary text-white px-4 py-2 rounded-lg mt-4">تایید</button>
-  </div>
-</div>
-
-  <div class="shapes">
+      
+      <div class="shapes">
    <div class="fixed -start-1/2 -top-1/2 -z-10 animate-spin-very-slow xl:-start-[20%] xl:-top-1/3">
     <img alt="" class="" src="{% static 'images/gradient-1.png' %}"/>
    </div>

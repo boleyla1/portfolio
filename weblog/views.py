@@ -6,6 +6,7 @@ import jdatetime
 
 def blog_list(request):
     blogs = Blog.objects.all()
+
     return render(request, 'weblog/blog.html', {'blogs': blogs})
 
 

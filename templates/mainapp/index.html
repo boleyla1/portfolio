@@ -11,7 +11,7 @@
       {% for project in projects %}
       <div class="flex flex-col gap-1 md:flex-row md:gap-10">
         <p class="mt-1 text-sm font-medium text-muted dark:text-light/70">
-          {{ project.start_date }} - {{ project.end_date }}
+          {{ project.start_date_shamsi }} - {{ project.end_date_shamsi }}
         </p>
         <div class="flex items-center gap-3">
           <div class="grid h-8 w-8 shrink-0 place-content-center rounded-lg bg-light dark:bg-dark-2">
@@ -81,7 +81,7 @@
 <div class="rounded-2xl bg-white p-6 shadow dark:bg-black dark:shadow-dark lg:col-span-2">
   <div class="flex flex-wrap items-center justify-between gap-2">
     <h3 class="text-2xl font-semibold dark:text-light">خدماتی که ارائه دادم</h3>
-    <a class="inline-flex items-center justify-center gap-2 border-b text-center text-base text-primary transition hover:border-b-primary dark:border-b-muted dark:hover:border-b-primary" href="services.html">
+    <a class="inline-flex items-center justify-center gap-2 border-b text-center text-base text-primary transition hover:border-b-primary dark:border-b-muted dark:hover:border-b-primary" href="{% url 'service' %}">
       <span>مشاهده تمام خدمات</span>
       <svg class="h-5 w-5 rtl:-scale-x-100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
         <path d="M4.167 10h11.666m-4.999 5 5-5m-5-5 5 5"></path>

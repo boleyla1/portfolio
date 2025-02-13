@@ -6,5 +6,6 @@ from .models import *
 def service(request):
     faq = Faq.objects.all()
     projects = Project.objects.all()
-    return render(request, 'serviceapp/services.html', {'projects':projects , 'faq':faq})
+    services = Service.objects.all()
+    return render(request, 'serviceapp/services.html', {'projects': projects, 'faq': faq, 'services': services})
 # Create your views here.

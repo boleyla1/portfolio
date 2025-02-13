@@ -1,3 +1,4 @@
+import jdatetime
 from django.db import models
 
 
@@ -8,6 +9,13 @@ class Project(models.Model):
     end_date = models.DateField(null=True, blank=True)
     image = models.ImageField(upload_to='projects/')
     company = models.CharField(max_length=100)
+    url = models.URLField(max_length=200, default='https://www.google.com')
+
+    def end_date_shamsi(self):
+        return jdatetime.datetime.fromgregorian(datetime=self.end_date).strftime('%Y/%m/%d %H:%M')
+
+    def start_date_shamsi(self):
+        return jdatetime.datetime.fromgregorian(datetime=self.end_date).strftime('%Y/%m/%d %H:%M')
 
     def __str__(self):
         return self.title
@@ -37,4 +45,3 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
-

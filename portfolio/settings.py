@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'mainapp',
     'aboutapp',
     'weblog',
-    'serviceapp'
+    'serviceapp',
+    "ckeditor",
+    'ghasedakpack',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -104,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa'
 
 TIME_ZONE = 'UTC'
 
@@ -131,3 +134,42 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'full',
+#         'height': 300,
+#         'width': 800,
+#         'extraPlugins': ','.join([
+#             'div',
+#             'autolink',
+#             'autoembed',
+#             'embedsemantic',
+#             'autogrow',
+#             'widget',
+#             'lineutils',
+#             'clipboard',
+#             'dialog',
+#             'dialogui',
+#             'elementspath'
+#         ]),
+#         'contentsCss': [
+#             'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
+#         ],
+#         'bodyClass': 'document-editor',
+#         'stylesSet': [
+#             { 'name': 'Bootstrap Button', 'element': 'a', 'attributes': { 'class': 'btn btn-primary' } },
+#             { 'name': 'Bootstrap Alert', 'element': 'div', 'attributes': { 'class': 'alert alert-warning' } },
+#             { 'name': 'Bootstrap List', 'element': 'ul', 'attributes': { 'class': 'list-group' }, 'children': [
+#                 { 'name': 'Bootstrap List Item', 'element': 'li', 'attributes': { 'class': 'list-group-item' } }
+#             ]}
+#         ]
+#     }
+# }
+# settings.py
+
+GHASEDAK_API_KEY = 'd705e373f8d1e3c39bb035a0c076b6c814262aa12162dbbe7454605c3e6f221d9ocnC5Ric5SDjbuS'
+GHASEDAK_TEMPLATE_ID = 'boleyla'
+GHASEDAK_LINE_NUMBER = '30005088'
+
+AUTH_USER_MODEL = "accounts.User"
