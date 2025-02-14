@@ -1,17 +1,15 @@
+import uuid
 from random import randint
 from .models import User, Otp
 from django.contrib.auth import authenticate, login
-from django.views import View
+
 from django.shortcuts import render, redirect, reverse
-from datetime import timedelta
-from django.utils import timezone
-from django.http import JsonResponse
+from uuid import uuid4
 from django.views import View
-import ghasedak_sms
-from .forms import LogimForm, RegisterForm, ChekOtpForm
+from .forms import LogimForm, RegisterForm, ChekOtpForm, CompeletProfile
 import requests
 import json
-import ghasedak_sms
+from django.utils.crypto import get_random_string
 
 # SMS = ghasedak_sms.Ghasedak('35a3e8b000ce1ed436329a2796b38e634ca4f35bfb9f7adb2cd91ee64cbc26f5kdbHYwiRyWt7bbMz')
 
@@ -23,7 +21,7 @@ API_KEY = "35a3e8b000ce1ed436329a2796b38e634ca4f35bfb9f7adb2cd91ee64cbc26f5kdbHY
 
 
 class UserLogin(View):
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         form = LogimForm()
         return render(request, 'accounts/send_code.html', {'form': form})
 
@@ -43,10 +41,10 @@ class UserLogin(View):
         return render(request, 'accounts/send_code.html', {'form': form})
 
 
-class RigesterView(View):
-    def get(self, request):
+class OtpLoginView(View):
+    def get(self, request, *args, **kwargs):
         form = RegisterForm()
-        return render(request, 'accounts/register.html', {'form': form})
+        return render(request, 'accounts/otplogin.html', {'form': form})
 
     def post(self, request):
         form = RegisterForm(request.POST)
@@ -54,42 +52,85 @@ class RigesterView(View):
             cd = form.cleaned_data
             randcode = randint(1000, 9999)
             phone = cd['phone']
-            # sms_api.verification({'receptor': phone, 'type': '1', 'template': 'boleyla', 'param1': randcode})
             send_otp(phone, randcode)
+            token = str(uuid4())
 
             print(randcode)
             print(send_otp)
 
-            Otp.objects.create(phone=cd['phone'], code=randcode)
+            Otp.objects.create(phone=cd['phone'], code=randcode, token=token)
 
-            return redirect(reverse('verify_code') + f'?phone={cd['phone']}')
+            return redirect(reverse('verify_code') + f'?token={token}')
         else:
             form.add_error('phone', 'شماره تلفن صحیح نیست')
-        return render(request, 'accounts/register.html', {'form': form})
+        return render(request, 'accounts/otplogin.html', {'form': form})
 
 
 class ChekOtp(View):
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         form = ChekOtpForm()
         return render(request, 'accounts/verify_code.html', {'form': form})
 
     def post(self, request):
-        phone = request.GET.get('phone')
+        token = request.GET.get('token')
         form = ChekOtpForm(request.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            if Otp.objects.filter(code=cd['code'], phone=phone).exists():
-                user = User.objects.create_user(phone=phone)
+            if Otp.objects.filter(code=cd['code'], token=token).exists():
+                otp = Otp.objects.get(token=token)
+                user, is_create = User.objects.get_or_create(phone=otp.phone)
+                if otp:
+                    user, created = User.objects.get_or_create(phone=otp.phone)
+                    if not user.first_name or not user.last_name:
+                        return redirect(reverse('nameuser') + f'?token={token}')
+
                 login(request, user)
-                print(user)
-                return redirect('/')
+                otp.delete()
             else:
-                return redirect('register')
+                return redirect('/')
         return render(request, 'accounts/verify_code.html', {'form': form})
 
 
+class CompleteProfileView(View):
+    def get(self, request, *args, **kwargs):
+        token = request.GET.get('token')
+        if token:
+            try:
+                otp = Otp.objects.get(token=token)
+                phone = otp.phone
+                form = CompeletProfile()
+                return render(request, 'accounts/name.html', {'form': form, 'phone': phone, 'token': token})
+            except Otp.DoesNotExist:
+                return redirect('/')  # اگر توکنی با این مقدار یافت نشد، به صفحه اصلی هدایت می‌شود
+        else:
+            return redirect('/')  # در صورتی که توکن موجود نباشد، به صفحه اصلی هدایت می‌شود
+
+    def post(self, request):
+        token = request.GET.get('token')
+        if token:
+            try:
+                otp = Otp.objects.get(token=token)
+                phone = otp.phone
+                form = CompeletProfile(request.POST)
+                if form.is_valid():
+                    cd = form.cleaned_data
+                    user = User.objects.get(phone=phone)
+                    user.first_name = cd['first_name']
+                    user.last_name = cd['last_name']
+                    user.save()  # ذخیره تغییرات در دیتابیس
+                    login(request, user)
+                    otp.delete()  # پس از تکمیل پروفایل، توکن را حذف کنید
+                    return redirect('/')
+                else:
+                    return render(request, 'accounts/name.html', {'form': form, 'phone': phone, 'token': token})
+            except Otp.DoesNotExist:
+                return redirect('/')  # در صورتی که توکن معتبر نباشد
+        return redirect('/')
+
+
 def NameUser(request):
-    return render(request, 'accounts/name.html')
+    user = User.objects.all()
+    return render(request, 'base.html', {'user': user})
 
 
 #----------- پنل پیامکی-----------------

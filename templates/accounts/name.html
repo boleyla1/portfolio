@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
 {% block name %}
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ورودی نام و نام خانوادگی</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -71,17 +66,16 @@
 }
 
     </style>
-</head>
-<body>
+
     <div class="form-container">
         <h2>اطلاعات خود را وارد کنید</h2>
-        <form method="post" action="{% url 'nameuser' %}">
-            {% csrf_token %}
-            <input type="text" name="first_name" placeholder="نام" required>
-            <input type="text" name="last_name" placeholder="نام خانوادگی" required>
-            <button type="submit">ثبت نام</button>
-        </form>
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.first_name }}
+    {{ form.last_name }}
+    <button type="submit">ثبت</button>
+</form>
+
     </div>
-</body>
-</html>
+
 {% endblock %}

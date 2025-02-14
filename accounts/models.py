@@ -42,7 +42,8 @@ class User(AbstractBaseUser):
         null=True,
         blank=True,
     )
-    fullname = models.CharField(max_length=50, verbose_name='نام کامل')
+    first_name = models.CharField(max_length=50, verbose_name='نام ')
+    last_name = models.CharField(max_length=50, verbose_name='نام خانوادگی')
 
     phone = models.CharField(unique=True,
                              max_length=12,
@@ -80,6 +81,7 @@ class User(AbstractBaseUser):
 
 
 class Otp(models.Model):
+    token = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=11)
     code = models.SmallIntegerField()
     expiration_date = models.DateTimeField(auto_now_add=True)

@@ -68,3 +68,17 @@ class RegisterForm(forms.Form):
 
 class ChekOtpForm(forms.Form):
     code = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+class CompeletProfile(forms.Form):
+    first_name = forms.CharField(
+        max_length=50,
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'نام', 'class': 'form-control'})
+    )
+    last_name = forms.CharField(
+        max_length=50,
+        required=True,
+        widget=forms.TextInput(attrs={'placeholder': 'نام خانوادگی', 'class': 'form-control'})
+    )
+    test = forms.TextInput(attrs={'class': 'form-control'})

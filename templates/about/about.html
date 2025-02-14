@@ -2,14 +2,14 @@
 {% block content %}
     {% load static %}
     
-        <div class="rounded-2xl bg-white p-6 shadow dark:bg-black dark:shadow-dark lg:col-span-2 lg:p-10">
+      <div class="rounded-2xl bg-white p-6 shadow dark:bg-black dark:shadow-dark lg:col-span-2 lg:p-10">
      <div class="flex flex-col-reverse items-start gap-6 lg:flex-row lg:gap-10">
       <div class="">
        <h2 class="text-3xl font-semibold text-dark dark:text-light lg:text-[40px]">
         سلام، من کریس ریان هستم 👋
        </h2>
        <p class="mt-4 text-lg text-muted dark:text-light/70 lg:mt-6 lg:text-2xl">
-        یک توسعه‌دهنده فول‌استک پرشور 🖥️ و طراح محصول با {{ come.years}} سال تجربه در بیش از ۲۴ کشور دنیا.
+        یک توسعه‌دهنده فول‌استک پرشور 🖥️ و طراح محصول با ۱۲ سال تجربه در بیش از ۲۴ کشور دنیا.
        </p>
       </div>
       <div class="flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-light px-4 py-2 text-center text-base font-medium leading-none text-primary dark:bg-dark-2 lg:text-lg">
@@ -33,7 +33,6 @@
          </span>
          +
         </h2>
-
         <p class="mt-2 text-muted">
          سال تجربه
         </p>
@@ -61,66 +60,11 @@
         </p>
        </div>
       </div>
-      <div class="relative -mt-6 hidden h-[100px] w-[100px] p-4 lg:block xl:-mt-10">
-       <img alt="" class="absolute inset-0 h-full w-full animate-spin-slow dark:hidden" src="{% static 'images/circle-text.svg' %}"/>
-       <img alt="" class="absolute inset-0 hidden h-full w-full animate-spin-slow dark:block" src="{% static 'images/circle-text-light.svg' %}"/>
-       <div class="grid h-full w-full place-content-center rounded-full bg-primary text-light">
-        <svg class="h-10 w-10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-         <path d="M20 5v30m-5-5 5 5 5-5">
-         </path>
-        </svg>
-       </div>
-      </div>
      </div>
 
-     <div class="mt-10 lg:mt-14">
-      <h3 class="text-2xl font-medium text-dark dark:text-light lg:text-3xl">
-       پروژه ها
-      </h3>
-         {% for proj in Projects %}
-      <div class="mt-8 space-y-4">
-       <div class="group relative grid grid-cols-1 items-center gap-4 rounded-lg border border-transparent bg-light p-6 transition hover:border-light hover:bg-white dark:bg-dark-2 dark:hover:border-primary dark:hover:bg-black md:grid-cols-4 xl:gap-10">
-        <div class="flex flex-col gap-4 md:col-span-2 md:flex-row md:items-center md:gap-6">
-         <div class="grid h-10 w-10 shrink-0 place-content-center roulanded-lg bg-white transition group-hover:bg-light dark:bg-black dark:group-hover:bg-dark-2">
-          <img alt="" class="h-6 w-6 shrink-0" src="{{ proj.image.url }}"/>
-         </div>
-         <div class="">
-          <h5 class="font-medium leading-tight text-dark dark:text-light xl:text-lg xl:leading-tight">
-           {{ proj.title }}
-          </h5>
-          <p class="text-muted">
-              {{ proj.end_date_shamsi}}
-          </p>
-         </div>
-        </div>
-        <div class="flex items-center gap-1.5">
-         <svg class="h-5 w-5 shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 25" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6 9.5a6 6 0 1 0 12 0 6 6 0 0 0-12 0Z">
-          </path>
-          <path d="m12 15.5 3.4 5.89 1.598-3.233 3.598.232-3.4-5.889m-10.394 0-3.4 5.89L7 18.157l1.598 3.232 3.4-5.889">
-          </path>
-         </svg>
-         <h5 class="font-medium leading-tight text-dark dark:text-light">
-             {{ proj.company }}
-         </h5>
-        </div>
-        <div class="text-end">
-         <a class="inline-flex items-center justify-center gap-2 rounded bg-white px-3 py-2 text-center text-sm leading-none text-dark transition after:absolute after:inset-0 after:h-full after:w-full after:content-[''] hover:bg-light hover:text-primary dark:bg-black dark:text-light/70 dark:hover:bg-dark-2 dark:hover:text-primary" href="{{ proj.url }}">
-          <span>
-           مشاهده پروژه
-          </span>
-          <svg class="h-3.5 w-3.5 shrink-0 rtl:-scale-x-100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" viewbox="0 0 14 15" xmlns="http://www.w3.org/2000/svg">
-           <path d="m9.917 4.583-5.834 5.834m.584-5.834h5.25v5.25">
-           </path>
-          </svg>
-         </a>
-        </div>
-       </div>
-                                {% endfor %}
-      </div>
-     </div>
-     <div class="mt-10 lg:mt-14">
-         
+    
+    
+      <div class="mt-10 lg:mt-14">
       <div class="flex flex-wrap items-center justify-between gap-6">
        <h3 class="text-2xl font-medium text-dark dark:text-light lg:text-3xl">
         مقالات و انتشارات
@@ -140,44 +84,56 @@
         </button>
        </div>
       </div>
+          
       <div class="mt-8">
        <div class="swiper blog-carousel">
            {% for blog in Blogs %}
         <div class="swiper-wrapper">
+            
          <div class="swiper-slide">
+             
           <div class="">
+              
            <div class="relative">
-            <a class="group block aspect-6/4 overflow-hidden rounded-lg" href="{% url 'blog_detail' id=blog.id %}">
+            <a class="group block aspect-6/4 overflow-hidden rounded-lg" href="{{ blog.get_absolute_url }}">
              <img alt="" class="h-full w-full rounded-lg object-cover transition duration-700 group-hover:scale-105" src="{{ blog.image.url }}"/>
             </a>
             <div class="absolute bottom-4 start-4 flex flex-wrap gap-2">
-             <a class="inline-flex items-center justify-center gap-2 rounded bg-white px-2 py-1 text-center text-xs leading-none text-primary shadow transition hover:bg-primary hover:text-white" href="#">
+             <a class="inline-flex items-center justify-center gap-2 rounded bg-white px-2 py-1 text-center text-xs leading-none text-primary shadow transition hover:bg-primary hover:text-white" href="{{ blog.get_absolute_url }}">
               توسعه
              </a>
             </div>
            </div>
            <div class="mt-6">
             <h2 class="text-xl font-medium xl:text-2xl">
-             <a class="inline-block text-dark transition hover:text-primary dark:text-light/70 dark:hover:text-primary" href="{% url 'blog_detail' id=blog.id %}">
+             <a class="inline-block text-dark transition hover:text-primary dark:text-light/70 dark:hover:text-primary" href="{{ blog.get_absolute_url }}">
                  {{ blog.title }}
              </a>
             </h2>
             <ul class="mt-4 flex flex-wrap items-center gap-2">
              <li class="relative text-sm text-muted/50 before:me-1 before:content-['\2022'] dark:text-muted">
-                 {{ blog.timeread }} دقیقه مطالعه
+                 {{blog.timeread}} دقیقه مطالعه
              </li>
              <li class="relative text-sm text-muted/50 before:me-1 before:content-['\2022'] dark:text-muted">
-                 {{blog.created_at_shamsi }}
+              {{ blog.created_at|date }}
              </li>
             </ul>
+  
            </div>
+              
           </div>
+             
          </div>
             {% endfor %}
-           </div>
+        </div>
+           
        </div>
+          
       </div>
-        
+                       
+   </div>
+</div>
+    
      <div class="mt-10 lg:mt-14">
       <div class="group flex gap-6 overflow-hidden rounded-lg bg-light p-6 dark:bg-dark-2">
        <div class="relative flex min-w-full shrink-0 animate-infinite-scroll gap-6 group-hover:[animation-play-state:paused]">
@@ -198,6 +154,10 @@
        </div>
       </div>
      </div>
-    </div>
-        </div>
+
+      
+ 
+     
+        
+     
 {% endblock %}
