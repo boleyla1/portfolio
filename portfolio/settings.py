@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'serviceapp',
     "ckeditor",
     'ghasedakpack',
-    'accounts'
+    'accounts',
+    'jobapp',
 ]
 
 MIDDLEWARE = [
